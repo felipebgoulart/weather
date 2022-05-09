@@ -11,3 +11,9 @@ TextStyle h1 = const TextStyle(
   fontWeight: FontWeight.w700,
   fontStyle: FontStyle.normal,
 );
+
+TextStyle segmentTitle = const TextStyle(
+  color: Color(0xffEBEBF5),
+  fontSize: 16,
+  fontWeight: FontWeight.bold
+);
