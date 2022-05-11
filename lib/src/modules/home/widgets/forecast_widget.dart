@@ -78,7 +78,7 @@ class _ForecastState extends State<Forecast> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: SizedBox(
-            height: 160,
+            height: 170,
             child: Row(
               children: <Widget>[
                 Expanded(

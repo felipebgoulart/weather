@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather/core/themes/app_colors.dart';
 
 late BuildContext buildContext;
 
@@ -16,4 +17,9 @@ TextStyle segmentTitle = const TextStyle(
   color: Color(0xffEBEBF5),
   fontSize: 16,
   fontWeight: FontWeight.bold
+);
+
+TextStyle weatherCardTitle = TextStyle(
+  color: AppColors.white.withOpacity(.5),
+  fontSize: 16
 );

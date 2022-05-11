@@ -1,7 +1,5 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:weather/core/constants/assets_global.dart';
 import 'package:weather/core/themes/app_colors.dart';
 import 'package:weather/src/modules/home/models/forecast_item_model.dart';
 

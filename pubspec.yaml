@@ -20,6 +20,7 @@ dependencies:
   geolocator: ^8.2.1
   geocoding: ^2.0.4
   intl: ^0.17.0
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   build_runner: ^2.1.10

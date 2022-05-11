@@ -36,15 +36,15 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
   
   @override
   @observable
-  late LocationWeatherModel weather;
+  LocationWeatherModel? weather;
   
   @override
   @observable
-  late CurrentWeatherModel currentWeather;
+  CurrentWeatherModel? currentWeather;
   
   @override
   @observable
-  late String cityName;
+  String? cityName;
   
   @override
   @observable
@@ -102,7 +102,7 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
   }
 
   ForecastItemModel buildFromDaily (int index) {
-    DailyModel daily = weather.daily[index];
+    DailyModel daily = weather!.daily[index];
     TemperatureModel temperature = daily.temperature;
 
     num averageTemp = temperature.day.round()
@@ -116,24 +116,24 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
       title: DateFormat('EEE').format(DateTime.fromMillisecondsSinceEpoch(daily.date * 1000)),
       humidity: daily.humidity.toString() + '%',
       temp: averageTemp.round().toString() + '˚',
-      iconPath: AppAssets.dayClearSky
+      iconPath: WeatherService.findIconToWeather(daily.weatherInfo.first, daily.date, daily.clouds, daily.windSpeed)
     );
   }
 
   ForecastItemModel buildFromHourly (int index) {
-    HourlyModel hourly = weather.hourly[index];
+    HourlyModel hourly = weather!.hourly[index];
 
     return ForecastItemModel(
       title: DateFormat('H a').format(DateTime.fromMillisecondsSinceEpoch(hourly.date * 1000)),
       humidity: hourly.humidity.toString() + '%',
       temp: hourly.temperature.round().toString(),
-      iconPath: WeatherService.findIconToWeatherFromDaily(hourly)
+      iconPath: WeatherService.findIconToWeather(hourly.weatherInfo.first, hourly.date, hourly.clouds, hourly.windSpeed)
     );
   }
 
   @override
   int forecastListLenght() {
-    return selectedTab == 0 ? weather.hourly.length : weather.daily.length;
+    return selectedTab == 0 ? weather!.hourly.length : weather!.daily.length;
   }
 
   @override
@@ -142,12 +142,12 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
       isLoading = true;
       Position position = await geoService.getCurrentPosition();
       weather = await homeRepository.getForecasts(position);
-      currentWeather = weather.current;
+      currentWeather = weather!.current;
 
       List<Placemark> location = await placemarkFromCoordinates(position.latitude, position.longitude);
       cityName = location.first.locality ?? '';
       isLoading = false;
-      return weather;
+      return weather!;
     } on Exception catch (error) {
       log(error.toString());
       throw Exception('Error getting forecast data');

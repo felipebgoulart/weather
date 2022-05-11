@@ -2,6 +2,9 @@ import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather/core/themes/app_colors.dart';
+import 'package:weather/core/widgets/cards/item_card_widget.dart';
+import 'package:weather/core/widgets/cards/sun_position_card_widget.dart';
+import 'package:weather/core/widgets/cards/uv_index_card_widget.dart';
 import 'package:weather/src/modules/home/stores/home_store.dart';
 import 'package:weather/src/modules/home/widgets/forecast_widget.dart';
 
@@ -73,7 +76,30 @@ class _BottomSheetWeatherState extends State<BottomSheetWeather> {
                           ),
                         ),
                       ),
-                      const Forecast()
+                      const Forecast(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        child: LayoutBuilder(
+                          builder: (BuildContext context, BoxConstraints constraints) => SizedBox(
+                            height: constraints.maxWidth * .55,
+                            child: Row(
+                              children: <Widget> [
+                                Expanded(
+                                  child: UvIndexCard(
+                                    uvIndex: _homeStore.currentWeather!.uvi,
+                                  )
+                                ),
+                                const SizedBox(
+                                  width: 12,
+                                ),
+                                const Expanded(
+                                  child: SunPositionCard()
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),

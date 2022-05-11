@@ -9,6 +9,70 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeStore on _HomeStoreBase, Store {
+  late final _$isLoadingAtom =
+      Atom(name: '_HomeStoreBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  late final _$weatherAtom =
+      Atom(name: '_HomeStoreBase.weather', context: context);
+
+  @override
+  LocationWeatherModel? get weather {
+    _$weatherAtom.reportRead();
+    return super.weather;
+  }
+
+  @override
+  set weather(LocationWeatherModel? value) {
+    _$weatherAtom.reportWrite(value, super.weather, () {
+      super.weather = value;
+    });
+  }
+
+  late final _$currentWeatherAtom =
+      Atom(name: '_HomeStoreBase.currentWeather', context: context);
+
+  @override
+  CurrentWeatherModel? get currentWeather {
+    _$currentWeatherAtom.reportRead();
+    return super.currentWeather;
+  }
+
+  @override
+  set currentWeather(CurrentWeatherModel? value) {
+    _$currentWeatherAtom.reportWrite(value, super.currentWeather, () {
+      super.currentWeather = value;
+    });
+  }
+
+  late final _$cityNameAtom =
+      Atom(name: '_HomeStoreBase.cityName', context: context);
+
+  @override
+  String? get cityName {
+    _$cityNameAtom.reportRead();
+    return super.cityName;
+  }
+
+  @override
+  set cityName(String? value) {
+    _$cityNameAtom.reportWrite(value, super.cityName, () {
+      super.cityName = value;
+    });
+  }
+
   late final _$draggableScrollableControllerAtom = Atom(
       name: '_HomeStoreBase.draggableScrollableController', context: context);
 
@@ -23,6 +87,24 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     _$draggableScrollableControllerAtom
         .reportWrite(value, super.draggableScrollableController, () {
       super.draggableScrollableController = value;
+    });
+  }
+
+  late final _$forecastHorizontalScrollControllerAtom = Atom(
+      name: '_HomeStoreBase.forecastHorizontalScrollController',
+      context: context);
+
+  @override
+  ScrollController get forecastHorizontalScrollController {
+    _$forecastHorizontalScrollControllerAtom.reportRead();
+    return super.forecastHorizontalScrollController;
+  }
+
+  @override
+  set forecastHorizontalScrollController(ScrollController value) {
+    _$forecastHorizontalScrollControllerAtom
+        .reportWrite(value, super.forecastHorizontalScrollController, () {
+      super.forecastHorizontalScrollController = value;
     });
   }
 
@@ -97,7 +179,12 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   @override
   String toString() {
     return '''
+isLoading: ${isLoading},
+weather: ${weather},
+currentWeather: ${currentWeather},
+cityName: ${cityName},
 draggableScrollableController: ${draggableScrollableController},
+forecastHorizontalScrollController: ${forecastHorizontalScrollController},
 isOpen: ${isOpen},
 selectedTab: ${selectedTab}
     ''';

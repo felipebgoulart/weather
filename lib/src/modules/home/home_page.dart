@@ -38,11 +38,9 @@ class _HomePageState extends State<HomePage> {
         body: FutureBuilder<LocationWeatherModel>(
           future: _homeStore.getAllForecasts(),
           builder: (BuildContext context, AsyncSnapshot<LocationWeatherModel> asyncSnapshot) {
-            
             if (asyncSnapshot.hasError) {
               return Container();
             } else {
-
               if (_homeStore.isLoading) {
                 return Container();
               } else {
@@ -58,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget> [
                                   Text(
-                                    _homeStore.cityName,
+                                    _homeStore.cityName ?? '',
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 34,
@@ -66,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   Text(
-                                    _homeStore.currentWeather.temperature.round().toString() + '˚',
+                                    _homeStore.currentWeather!.temperature.round().toString() + '˚',
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 96,

@@ -25,7 +25,7 @@ class AppAssets {
   static const String nightCloud = 'lib/assets/images/forecasts/night/night_cloud.png';
   static const String nightSnow = 'lib/assets/images/forecasts/night/night_rain_snow.png';
   static const String nightRainWindy = 'lib/assets/images/forecasts/night/night_rain_rain_windy.png';
-  static const String nightRainny = 'lib/assets/images/forecasts/night/night_rain_rainny.png';
+  static const String nightRainny = 'lib/assets/images/forecasts/night/night_rainny.png';
   static const String nightWindy = 'lib/assets/images/forecasts/night/night_windy.png';
   
 }

@@ -6,14 +6,14 @@ import 'package:weather/src/modules/home/models/forecast_item_model.dart';
 
 abstract class IHomeStore with Store {
 
-  set weather(LocationWeatherModel value);
-  LocationWeatherModel get weather;
+  set weather(LocationWeatherModel? value);
+  LocationWeatherModel? get weather;
 
-  set cityName(String value);
-  String get cityName;
+  set cityName(String? value);
+  String? get cityName;
 
-  set currentWeather(CurrentWeatherModel value);
-  CurrentWeatherModel get currentWeather;
+  set currentWeather(CurrentWeatherModel? value);
+  CurrentWeatherModel? get currentWeather;
   
   set isLoading(bool value);
   bool get isLoading;
