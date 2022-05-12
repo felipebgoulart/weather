@@ -5,7 +5,6 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:weather/core/constants/assets_global.dart';
 import 'package:weather/core/models/current_weather_model.dart';
 import 'package:weather/core/models/daily_model.dart';
 import 'package:weather/core/models/hourly_model.dart';
@@ -23,11 +22,13 @@ class HomeStore = _HomeStoreBase with _$HomeStore;
 
 abstract class _HomeStoreBase with Store implements IHomeStore {
   final HomeRepository homeRepository;
+  final WeatherService weatherService;
   final GeoService geoService;
 
   _HomeStoreBase({
     required this.homeRepository,
-    required this.geoService
+    required this.geoService,
+    required this.weatherService
   });
 
   @override
@@ -116,7 +117,7 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
       title: DateFormat('EEE').format(DateTime.fromMillisecondsSinceEpoch(daily.date * 1000)),
       humidity: daily.humidity.toString() + '%',
       temp: averageTemp.round().toString() + '˚',
-      iconPath: WeatherService.findIconToWeather(daily.weatherInfo.first, daily.date, daily.clouds, daily.windSpeed)
+      iconPath: weatherService.findIconToWeather(daily.weatherInfo.first, daily.date, daily.clouds, daily.windSpeed)
     );
   }
 
@@ -127,7 +128,7 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
       title: DateFormat('H a').format(DateTime.fromMillisecondsSinceEpoch(hourly.date * 1000)),
       humidity: hourly.humidity.toString() + '%',
       temp: hourly.temperature.round().toString(),
-      iconPath: WeatherService.findIconToWeather(hourly.weatherInfo.first, hourly.date, hourly.clouds, hourly.windSpeed)
+      iconPath: weatherService.findIconToWeather(hourly.weatherInfo.first, hourly.date, hourly.clouds, hourly.windSpeed)
     );
   }
 

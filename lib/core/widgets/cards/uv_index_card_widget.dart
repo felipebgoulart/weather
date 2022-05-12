@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather/core/services/weather/weather_service.dart';
 import 'package:weather/core/themes/app_colors.dart';
 import 'package:weather/core/themes/app_typograph.dart';
@@ -7,8 +8,9 @@ import 'package:weather/core/widgets/progress_bar/weather_progress_widget.dart';
 
 class UvIndexCard extends StatelessWidget {
   final num uvIndex;
+  final WeatherService _weatherService = Modular.get<WeatherService>();
 
-  const UvIndexCard({
+  UvIndexCard({
     Key? key,
     required this.uvIndex
   }) : super(key: key);
@@ -43,7 +45,7 @@ class UvIndexCard extends StatelessWidget {
             )
           ),
           Text(
-            WeatherService.findUVIndexLabel(uvIndex),
+            _weatherService.findUVIndexLabel(uvIndex),
             style: TextStyle(
               color: AppColors.white,
               fontSize: 28
@@ -52,7 +54,7 @@ class UvIndexCard extends StatelessWidget {
         ],
       ),
       footer: WeatherProgress(
-        progressValue: WeatherService.calculateUVIndexTax(uvIndex),
+        progressValue: _weatherService.calculateUVIndexTax(uvIndex),
       ),
     );
   }

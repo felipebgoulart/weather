@@ -1,11 +1,13 @@
 import 'package:weather/core/constants/assets_global.dart';
 import 'package:weather/core/models/weather_info_model.dart';
+import 'package:weather/core/services/weather/weather_service_interface.dart';
 
-class WeatherService {
+class WeatherService implements IWeatherService {
 
-  static const double windSpeedCondition = 2.5;
+  double windSpeedCondition = 2.5;
 
-  static String findIconToWeather(WeatherInfoModel weatherInfo, int date, num clouds, num windSpeed) {
+  @override
+  String findIconToWeather(WeatherInfoModel weatherInfo, int date, num clouds, num windSpeed) {
     int hour = DateTime.fromMillisecondsSinceEpoch(date * 1000).hour;
 
     if (hour >= 6 && hour <= 17) {
@@ -110,8 +112,8 @@ class WeatherService {
     }
   }
 
-
-  static String findUVIndexLabel(num uvIndex) {
+  @override
+  String findUVIndexLabel(num uvIndex) {
     if (uvIndex <= 2) return 'Low';
     if (uvIndex <= 5) return 'Moderate';
     if (uvIndex <= 7) return 'Hight';
@@ -121,7 +123,18 @@ class WeatherService {
     return 'Undetermined';
   }
 
-  static double calculateUVIndexTax(num uvIndex) {
+  @override
+  double calculateUVIndexTax(num uvIndex) {
     return ((uvIndex * 100) / 11) / 100;
+  }
+
+  @override
+  double calculateSunPosition(int date) {
+    int hour = DateTime.fromMillisecondsSinceEpoch(date).hour;
+    print(hour);
+
+    double percentOfDay = hour * 100 / 24;
+
+    return percentOfDay * 100;
   }
 }

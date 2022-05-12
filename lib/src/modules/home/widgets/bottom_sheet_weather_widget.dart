@@ -92,8 +92,10 @@ class _BottomSheetWeatherState extends State<BottomSheetWeather> {
                                 const SizedBox(
                                   width: 12,
                                 ),
-                                const Expanded(
-                                  child: SunPositionCard()
+                                Expanded(
+                                  child: SunPositionCard(
+                                    date: _homeStore.currentWeather!.date,
+                                  )
                                 ),
                               ],
                             ),
