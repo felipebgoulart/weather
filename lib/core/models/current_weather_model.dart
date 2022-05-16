@@ -1,3 +1,4 @@
+import 'package:weather/core/models/rain_model.dart';
 import 'package:weather/core/models/weather_info_model.dart';
 import 'package:weather/core/models/weather_model.dart';
 
@@ -8,6 +9,7 @@ class CurrentWeatherModel extends WeatherModel {
   double feelsLike;
   int visibility;
   num temperature;
+  RainModel? rain;
 
   CurrentWeatherModel({
     required int date,
@@ -25,6 +27,7 @@ class CurrentWeatherModel extends WeatherModel {
     required num? windGust,
     required List<WeatherInfoModel> weatherInfo,
     required this.visibility,
+    this.rain,
   }) : super(
     date: date,
     clouds: clouds,
@@ -35,7 +38,7 @@ class CurrentWeatherModel extends WeatherModel {
     windDeg: windDeg,
     windGust: windGust,
     windSpeed: windSpeed,
-    weatherInfo: weatherInfo
+    weatherInfo: weatherInfo,
   );
 
   factory CurrentWeatherModel.fromJson(Map<String, dynamic>? json) {
@@ -59,6 +62,7 @@ class CurrentWeatherModel extends WeatherModel {
       windGust: json['wind_gust'],
       weatherInfo: (json['weather'] as List<dynamic>?)?.map((dynamic x) => WeatherInfoModel.fromJson(x)).toList() ?? List<WeatherInfoModel>.empty(),
       visibility: json['visibility'],
+      rain: json['rain'] != null ? RainModel.fromJson(json['rain']) : null
     );
   }
 }

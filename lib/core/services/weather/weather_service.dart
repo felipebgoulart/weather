@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:weather/core/constants/assets_global.dart';
 import 'package:weather/core/models/weather_info_model.dart';
 import 'package:weather/core/services/weather/weather_service_interface.dart';
@@ -130,11 +131,33 @@ class WeatherService implements IWeatherService {
 
   @override
   double calculateSunPosition(int date) {
-    int hour = DateTime.fromMillisecondsSinceEpoch(date).hour;
-    print(hour);
+    int hour = DateTime.fromMillisecondsSinceEpoch(date * 1000).hour;
 
     double percentOfDay = hour * 100 / 24;
 
-    return percentOfDay * 100;
+    return percentOfDay / 100;
+  }
+
+  @override
+  String formatDateHour(int date) {
+    return formatDate(date, 'H a');
+  }
+
+  @override
+  String formatDateHourMinute(int date) {
+    return formatDate(date, 'H:mm a');
+  }
+
+  @override
+  String formatDateWeek(int date) {
+    return formatDate(date, 'EEE');
+  }
+
+  String formatDate(int date, String format) {
+    try {
+      return DateFormat(format).format(DateTime.fromMillisecondsSinceEpoch(date * 1000));
+    } on Exception {
+      return 'Format not found';
+    }
   }
 }

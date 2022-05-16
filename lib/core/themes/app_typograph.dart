@@ -23,3 +23,21 @@ TextStyle weatherCardTitle = TextStyle(
   color: AppColors.white.withOpacity(.5),
   fontSize: 16
 );
+
+TextStyle directionsCompass = TextStyle(
+  color: AppColors.white,
+  fontSize: 14,
+  fontWeight: FontWeight.bold
+);
+
+TextStyle cardBodyText = TextStyle(
+  color: AppColors.white,
+  fontSize: 32,
+  fontWeight: FontWeight.w700
+);
+
+TextStyle cardFooterText = TextStyle(
+  color: AppColors.white,
+  fontSize: 14,
+  fontWeight: FontWeight.w500
+);

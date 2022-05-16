@@ -9,4 +9,10 @@ abstract class IWeatherService {
   double calculateUVIndexTax(num uvIndex);
 
   double calculateSunPosition(int date);
+
+  String formatDateHour(int date);
+ 
+  String formatDateHourMinute(int date);
+
+  String formatDateWeek(int date);
 }

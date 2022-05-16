@@ -8,10 +8,12 @@ import 'package:weather/core/widgets/cards/item_card_widget.dart';
 
 class SunPositionCard extends StatefulWidget {
   final int date;
+  final int sunset;
 
   const SunPositionCard({
     Key? key,
-    required this.date
+    required this.date,
+    required this.sunset,
   }) : super(key: key);
 
   @override
@@ -49,12 +51,11 @@ class _SunPositionCardState extends State<SunPositionCard> with SingleTickerProv
         builder: (BuildContext context, BoxConstraints constraints) {
           _path = _drawPath(constraints);
           return Stack(
-            children: [
+            children: <Widget> [
               Positioned(
-                top: 12,
                 width: constraints.maxWidth,
                 child: Text(
-                  '12:22 AM',
+                  _weatherService.formatDateHourMinute(widget.date),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 26,
@@ -72,15 +73,22 @@ class _SunPositionCardState extends State<SunPositionCard> with SingleTickerProv
                 left: _calculate().dx,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent,
-                    borderRadius: BorderRadius.circular(10)
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: <BoxShadow> [
+                      BoxShadow(
+                        color: AppColors.white,
+                        blurRadius: 10,
+                        spreadRadius: 1,
+                      )
+                    ]
                   ),
                   width: 10,
                   height: 10,
                 ),
               ),
               Positioned(
-                bottom: 10,
+                bottom: 2,
                 width: constraints.maxWidth,
                 child: Divider(
                   color: AppColors.white,
@@ -89,6 +97,13 @@ class _SunPositionCardState extends State<SunPositionCard> with SingleTickerProv
             ],
           );
         }
+      ),
+      footer: Text(
+        'Sunset: ${_weatherService.formatDateHourMinute(widget.sunset)}',
+        style: TextStyle(
+          color: AppColors.white,
+          fontWeight: ui.FontWeight.w500
+        ),
       ),
     );
   }
@@ -115,9 +130,9 @@ class SunrisePainter extends CustomPainter {
         AppColors.darkBlue,
       ],
       <double> [
-        .42,
+        .35,
         .48,
-        .85
+        .88,
       ]
     );
 

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:weather/core/models/current_weather_model.dart';
 import 'package:weather/core/models/daily_model.dart';
@@ -114,7 +113,7 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
     averageTemp /= 4;
 
     return ForecastItemModel(
-      title: DateFormat('EEE').format(DateTime.fromMillisecondsSinceEpoch(daily.date * 1000)),
+      title: weatherService.formatDateWeek(daily.date),
       humidity: daily.humidity.toString() + '%',
       temp: averageTemp.round().toString() + '˚',
       iconPath: weatherService.findIconToWeather(daily.weatherInfo.first, daily.date, daily.clouds, daily.windSpeed)
@@ -125,7 +124,7 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
     HourlyModel hourly = weather!.hourly[index];
 
     return ForecastItemModel(
-      title: DateFormat('H a').format(DateTime.fromMillisecondsSinceEpoch(hourly.date * 1000)),
+      title: weatherService.formatDateHour(hourly.date),
       humidity: hourly.humidity.toString() + '%',
       temp: hourly.temperature.round().toString(),
       iconPath: weatherService.findIconToWeather(hourly.weatherInfo.first, hourly.date, hourly.clouds, hourly.windSpeed)

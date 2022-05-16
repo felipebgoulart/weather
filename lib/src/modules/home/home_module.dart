@@ -5,7 +5,7 @@ import 'package:weather/core/services/dio/dio_interface.dart';
 import 'package:weather/core/services/geo/geo_interface.dart';
 import 'package:weather/core/services/weather/weather_service.dart';
 import 'package:weather/core/services/weather/weather_service_interface.dart';
-import 'package:weather/src/modules/home/home_page.dart';
+import 'package:weather/src/modules/home/pages/home_page.dart';
 import 'package:weather/src/modules/home/repositories/home_repository.dart';
 import 'package:weather/src/modules/home/stores/home_store.dart';
 

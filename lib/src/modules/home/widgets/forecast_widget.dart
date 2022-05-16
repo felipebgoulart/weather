@@ -18,62 +18,20 @@ class Forecast extends StatefulWidget {
 class _ForecastState extends State<Forecast> {
   final IHomeStore _homeStore = Modular.get<HomeStore>();
 
-  Widget _tab(String title, {required int index}) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => _homeStore.changeTab(index),
-        child: Observer(
-          builder: (BuildContext context) => Column(
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  title,
-                  style: segmentTitle,
-                ),
-              ),
-              _homeStore.selectedTab == index
-                  ? Container(
-                      height: 1,
-                      decoration: BoxDecoration(
-                          color: AppColors.transparent,
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                                color: AppColors.white,
-                                blurRadius: 3,
-                                offset: const Offset(0, -1))
-                          ]),
-                    )
-                  : Container()
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-          child: Row(
-            children: <Widget>[
-              _tab('Hourly Forecast', index: 0),
-              const SizedBox(width: 16),
-              _tab('Weekly Forecast', index: 1)
-            ],
-          ),
-        ),
         Container(
           height: 1,
           decoration: BoxDecoration(
-              color: AppColors.primaryDarker.withOpacity(.5),
-              boxShadow: const <BoxShadow>[
-                BoxShadow(
-                    color: Colors.black, blurRadius: 5, offset: Offset(0, 2))
-              ]),
+            color: AppColors.primaryDarker.withOpacity(.5),
+            boxShadow: const <BoxShadow>[
+              BoxShadow(
+                color: Colors.black, blurRadius: 5, offset: Offset(0, 2)
+              )
+            ]
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),

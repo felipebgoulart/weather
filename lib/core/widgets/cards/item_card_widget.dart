@@ -37,11 +37,13 @@ class ItemCard extends StatelessWidget {
           children: <Widget> [
             header 
             ?? Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget> [
                 Container(
-                  margin: const EdgeInsets.only(right: 8),
+                  margin: const EdgeInsets.only(right: 16),
                   child: Icon(
                     headerIcon ?? Icons.sunny,
+                    size: 22,
                     color: AppColors.white.withOpacity(.5),
                   ),
                 ),

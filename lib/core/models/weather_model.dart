@@ -1,3 +1,4 @@
+import 'package:weather/core/models/rain_model.dart';
 import 'package:weather/core/models/weather_info_model.dart';
 
 abstract class WeatherModel {
@@ -23,6 +24,6 @@ abstract class WeatherModel {
     required this.windSpeed,
     required this.windDeg,
     required this.windGust,
-    required this.weatherInfo
+    required this.weatherInfo,
   });
 }

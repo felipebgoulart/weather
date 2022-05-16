@@ -12,6 +12,7 @@ class DailyModel extends WeatherModel {
   double moonPhase;
   FeelsLikeModel feelsLike;
   TemperatureModel temperature;
+  num? rain;
 
   DailyModel({
     required int date,
@@ -30,7 +31,8 @@ class DailyModel extends WeatherModel {
     required this.sunset,
     required this.moonrise,
     required this.moonset,
-    required this.moonPhase
+    required this.moonPhase,
+    this.rain
   }) : super(
     date: date,
     pressure: pressure,
@@ -41,7 +43,7 @@ class DailyModel extends WeatherModel {
     windSpeed: windSpeed,
     windDeg: windDeg,
     windGust: windGust,
-    weatherInfo: weatherInfo
+    weatherInfo: weatherInfo,
   );
 
   factory DailyModel.fromJson(Map<String, dynamic>? json) {
@@ -66,7 +68,8 @@ class DailyModel extends WeatherModel {
       sunset: json['sunset'],
       moonrise: json['moonrise'],
       moonset: json['moonset'],
-      moonPhase: json['moon_phase']
+      moonPhase: json['moon_phase'],
+      rain: json['rain'],
     );
   }
 }
