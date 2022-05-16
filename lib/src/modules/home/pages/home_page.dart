@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    _homeStore.changeBackgroundimage();
     super.initState();
   }
 
@@ -26,10 +27,10 @@ class _HomePageState extends State<HomePage> {
     final Size size = MediaQuery.of(context).size;
 
     return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xff3A3F54),
+      decoration: BoxDecoration(
+        color: const Color(0xff3A3F54),
         image: DecorationImage(
-          image: AssetImage(AppAssets.nightSky),
+          image: AssetImage(_homeStore.backgroundImage),
           fit: BoxFit.cover
         )
       ),
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                 return Stack(
                   children: <Widget> [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 75),
+                      padding: const EdgeInsets.only(top: 64, bottom: 24),
                       child: Column(
                         children: <Widget> [
                           Expanded(
@@ -75,13 +76,22 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
+                          _homeStore.backgroundImage == AppAssets.nightSky
+                          ? Align(
+                            alignment: Alignment.topLeft,
+                            child: Image.asset(
+                              AppAssets.earth,
+                              width: MediaQuery.of(context).size.width / 4,
+                            ),
+                          )
+                          : Container(),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Image.asset(
-                              AppAssets.house,
+                              _homeStore.backgroundFigure,
                               width: MediaQuery.of(context).size.width,
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

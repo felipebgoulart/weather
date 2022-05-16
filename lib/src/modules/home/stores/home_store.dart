@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
+import 'package:weather/core/constants/assets_global.dart';
 import 'package:weather/core/models/current_weather_model.dart';
 import 'package:weather/core/models/daily_model.dart';
 import 'package:weather/core/models/hourly_model.dart';
@@ -30,6 +31,14 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
     required this.weatherService
   });
 
+  @override
+  @observable
+  String backgroundImage = AppAssets.nightSky;
+  
+  @override
+  @observable
+  String backgroundFigure = AppAssets.rocket;
+  
   @override
   @observable
   bool isLoading = false;
@@ -134,6 +143,21 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
   @override
   int forecastListLenght() {
     return selectedTab == 0 ? weather!.hourly.length : weather!.daily.length;
+  }
+
+  @override
+  @action
+  void changeBackgroundimage() {
+    int hour = DateTime.now().hour;
+
+    if (hour >= 12 && hour <= 17) {
+      backgroundImage = AppAssets.noonSky;
+      backgroundFigure = AppAssets.rocketSally;
+    }
+    if (hour >= 6 && hour < 12) {
+      backgroundImage = AppAssets.morningSky;
+      backgroundFigure = AppAssets.restSally;
+    }
   }
 
   @override

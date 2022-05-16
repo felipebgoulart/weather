@@ -6,7 +6,6 @@ import 'package:weather/core/themes/app_colors.dart';
 import 'package:weather/core/themes/app_typograph.dart';
 import 'package:weather/core/widgets/cards/feels_like_card_widget.dart';
 import 'package:weather/core/widgets/cards/humidity_card_widget.dart';
-import 'package:weather/core/widgets/cards/item_card_widget.dart';
 import 'package:weather/core/widgets/cards/pressure_card_widget.dart';
 import 'package:weather/core/widgets/cards/rain_card_widget.dart';
 import 'package:weather/core/widgets/cards/sun_position_card_widget.dart';
@@ -199,6 +198,7 @@ class _BottomSheetWeatherState extends State<BottomSheetWeather> {
                                         Expanded(
                                           child: FeelsLikeCard(
                                             temperature: _homeStore.currentWeather!.feelsLike,
+                                            currentTemp: _homeStore.currentWeather!.temperature,
                                           )
                                         ),
                                         const SizedBox(

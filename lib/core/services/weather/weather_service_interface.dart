@@ -15,4 +15,12 @@ abstract class IWeatherService {
   String formatDateHourMinute(int date);
 
   String formatDateWeek(int date);
+
+  String convertVisibilityToKm(num meters);
+
+  String findVisibilityStatus(num meters);
+
+  String feelsLikeTempStatus(num temperature, num currentTemp);
+
+  num calculateHpaToCircle(num hpa);
 }

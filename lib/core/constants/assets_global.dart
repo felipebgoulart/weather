@@ -3,7 +3,10 @@ class AppAssets {
   static const String nightSky = 'lib/assets/images/night_sky.jpg';
   static const String noonSky = 'lib/assets/images/noon_sky.jpg';
   static const String morningSky = 'lib/assets/images/morning_sky.jpg';
-  static const String house = 'lib/assets/images/house.png';
+  static const String restSally = 'lib/assets/images/rest_sally.png';
+  static const String rocketSally = 'lib/assets/images/rocket_sally.png';
+  static const String rocket = 'lib/assets/images/rocket.png';
+  static const String earth = 'lib/assets/images/earth.png';
 
   // Forecasts Day
   static const String dayClearSkyWindy = 'lib/assets/images/forecasts/day/day_clear_sky_windy.png';

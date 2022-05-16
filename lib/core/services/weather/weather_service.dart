@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:intl/intl.dart';
 import 'package:weather/core/constants/assets_global.dart';
 import 'package:weather/core/models/weather_info_model.dart';
@@ -151,6 +153,49 @@ class WeatherService implements IWeatherService {
   @override
   String formatDateWeek(int date) {
     return formatDate(date, 'EEE');
+  }
+
+  @override
+  num calculateHpaToCircle(num hpa) {
+    double maxPressure = 751.9;
+    double maxCirlcePi = 360;
+
+    return maxPressure * maxCirlcePi / hpa;
+  }
+
+  @override
+  String convertVisibilityToKm(num meters) {
+    try {
+      return (meters / 1000).round().toString() + ' KM';
+    } on Exception catch (error) {
+      log(error.toString());
+      return '- KM';
+    }
+  }
+
+  @override
+  String findVisibilityStatus(num meters) {
+    if (meters > 7000) return 'Visibility is good';
+    if (meters > 4000) return 'Visibility is not so good';
+    if (meters > 0) return 'Careful Visibility is not good';
+    
+    return '';
+  }
+
+  @override
+  String feelsLikeTempStatus(num temperature, num currentTemp) {
+    num average = temperature - currentTemp;
+
+    if (average < 0) {
+      average *= - 1;
+    }
+
+    if (average <= 1) return 'Similar to the actual temperature';
+
+    if (temperature < currentTemp) return 'Colder than the actual temperature';
+    if (temperature > currentTemp) return 'Hotter than the actual temperature';
+
+    return '';
   }
 
   String formatDate(int date, String format) {

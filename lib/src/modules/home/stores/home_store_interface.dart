@@ -6,6 +6,12 @@ import 'package:weather/src/modules/home/models/forecast_item_model.dart';
 
 abstract class IHomeStore with Store {
 
+  set backgroundImage(String imagePath);
+  String get backgroundImage;
+  
+  set backgroundFigure(String imagePath);
+  String get backgroundFigure;
+
   set weather(LocationWeatherModel? value);
   LocationWeatherModel? get weather;
 
@@ -35,6 +41,8 @@ abstract class IHomeStore with Store {
   void closeAnimate();
 
   void changeTab(int tab);
+
+  void changeBackgroundimage();
 
   ForecastItemModel buildForecastItem(int index);
 

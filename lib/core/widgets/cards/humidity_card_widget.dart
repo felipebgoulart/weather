@@ -28,7 +28,7 @@ class HumidityCard extends StatelessWidget {
         ],
       ),
       footer: Text(
-        'The dew point is ' + dewPoint.ceil().toString() + ' right now',
+        'The dew point is ' + dewPoint.round().toString() + ' right now',
         style: cardFooterText,
       ),
     );
