@@ -7,6 +7,7 @@ class AppAssets {
   static const String rocketSally = 'lib/assets/images/rocket_sally.png';
   static const String rocket = 'lib/assets/images/rocket.png';
   static const String earth = 'lib/assets/images/earth.png';
+  static const String mapa = 'lib/assets/images/mapa_terreo.png';
 
   // Forecasts Day
   static const String dayClearSkyWindy = 'lib/assets/images/forecasts/day/day_clear_sky_windy.png';

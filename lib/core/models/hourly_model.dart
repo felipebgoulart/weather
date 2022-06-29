@@ -8,6 +8,7 @@ class HourlyModel extends WeatherModel {
   int visibility;
   num temperature;
   RainModel? rain;
+  bool selected;
 
   HourlyModel({
     required int date,
@@ -23,7 +24,8 @@ class HourlyModel extends WeatherModel {
     required int windDeg,
     required num windGust,
     required List<WeatherInfoModel> weatherInfo,
-    this.rain
+    this.rain,
+    this.selected = false
   }) : super(
     date: date,
     pressure: pressure,

@@ -25,10 +25,10 @@ class HomeRepository {
         queryParameters: {
           'lat': position.latitude,
           'lon': position.longitude,
-          'dt': DateTime.now().microsecondsSinceEpoch,
+          'dt': DateTime.now().millisecondsSinceEpoch,
           'appid': env.appId,
           'units': 'metric',
-          'lang': 'pt_br'
+          // 'lang': 'pt_br'
         }
       );
 

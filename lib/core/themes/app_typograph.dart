@@ -36,6 +36,12 @@ TextStyle cardBodyText = TextStyle(
   fontWeight: FontWeight.w700
 );
 
+TextStyle title = TextStyle(
+  color: AppColors.white,
+  fontSize: 34,
+  fontWeight: FontWeight.w400
+);
+
 TextStyle cardFooterText = TextStyle(
   color: AppColors.white,
   fontSize: 14,

@@ -16,16 +16,18 @@ import 'package:weather/src/modules/home/models/forecast_item_model.dart';
 import 'package:weather/src/modules/home/stores/home_store_interface.dart';
 import 'package:weather/src/modules/home/repositories/home_repository.dart';
 
+import '../models/forecast_model.dart';
+
 part 'home_store.g.dart';
 
-class HomeStore = _HomeStoreBase with _$HomeStore;
+class HomeStore = HomeStoreBase with _$HomeStore;
 
-abstract class _HomeStoreBase with Store implements IHomeStore {
+abstract class HomeStoreBase with Store implements IHomeStore {
   final HomeRepository homeRepository;
   final WeatherService weatherService;
   final GeoService geoService;
 
-  _HomeStoreBase({
+  HomeStoreBase({
     required this.homeRepository,
     required this.geoService,
     required this.weatherService
@@ -45,11 +47,27 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
   
   @override
   @observable
+  int? selected;
+  
+  @override
+  @observable
   LocationWeatherModel? weather;
   
   @override
   @observable
   CurrentWeatherModel? currentWeather;
+  
+  @override
+  @observable
+  List<ForecastModel> dailyList = ObservableList<ForecastModel>.of([]);
+  
+  @override
+  @observable
+  List<ForecastModel> hourlyList = ObservableList<ForecastModel>.of([]);
+  
+  @override
+  @observable
+  ObservableList<ForecastItemModel> forecastList = ObservableList<ForecastItemModel>.of([]);
   
   @override
   @observable
@@ -62,6 +80,10 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
   @override
   @observable
   ScrollController forecastHorizontalScrollController = ScrollController();
+  
+  @override
+  @observable
+  ScrollController scrollController = ScrollController();
 
   @override
   @observable
@@ -71,15 +93,80 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
   @observable
   int selectedTab = 0;
 
+  @observable
+  ForecastModel? forecast;
+
   @override
   @action
   void toggleSheetVisibility() {
-    if (draggableScrollableController.size > 0.01) {
+    scrollController.jumpTo(0);
+    if (draggableScrollableController.size > 0.39) {
       draggableScrollableController.reset();
       isOpen = false;
     } else {
-      draggableScrollableController.jumpTo(.4);
+      draggableScrollableController.jumpTo(0.42);
       isOpen = true;
+    }
+  }
+
+  @override
+  @action
+  void buildForecast(int index, { bool current = false }) {
+
+    if (current) {
+      forecast = ForecastModel(
+        temperature: currentWeather!.temperature,
+        description: currentWeather!.weatherInfo.first.description,
+        uvi: currentWeather!.uvi,
+        windSpeed: currentWeather!.windSpeed,
+        windDeg: currentWeather!.windDeg,
+        feelsLike: currentWeather!.feelsLike,
+        humidity: currentWeather!.humidity,
+        dewPoint: currentWeather!.dewPoint,
+        pressure: currentWeather!.pressure,
+        date: currentWeather!.date,
+        visibility: currentWeather!.visibility,
+        sunset: currentWeather!.sunset,
+        rain: currentWeather!.rain,
+        clouds: currentWeather!.clouds,
+        weatherInfo: currentWeather!.weatherInfo
+      );
+    } else {
+      if (selectedTab == 0) {
+        forecast = ForecastModel(
+          temperature: weather!.hourly[index].temperature,
+          description: weather!.hourly[index].weatherInfo.first.description,
+          uvi: weather!.hourly[index].uvi,
+          windSpeed: weather!.hourly[index].windSpeed,
+          windDeg: weather!.hourly[index].windDeg,
+          feelsLike: weather!.hourly[index].feelsLike,
+          humidity: weather!.hourly[index].humidity,
+          dewPoint: weather!.hourly[index].dewPoint,
+          pressure: weather!.hourly[index].pressure,
+          date: weather!.hourly[index].date,
+          visibility: weather!.hourly[index].visibility,
+          rain: weather!.hourly[index].rain,
+          clouds: weather!.hourly[index].clouds,
+          weatherInfo: weather!.hourly[index].weatherInfo
+        );
+      } else {
+        forecast = ForecastModel(
+          temperature: weather!.daily[index].temperature.day,
+          description: weather!.daily[index].weatherInfo.first.description,
+          uvi: weather!.daily[index].uvi,
+          windSpeed: weather!.daily[index].windSpeed,
+          windDeg: weather!.daily[index].windDeg,
+          feelsLike: weather!.daily[index].feelsLike.day,
+          humidity: weather!.daily[index].humidity,
+          dewPoint: weather!.daily[index].dewPoint,
+          pressure: weather!.daily[index].pressure,
+          date: weather!.daily[index].date,
+          sunset: weather!.daily[index].sunset,
+          rain: weather!.daily[index].rain,
+          clouds: weather!.daily[index].clouds,
+          weatherInfo: weather!.daily[index].weatherInfo
+        );
+      }
     }
   }
 
@@ -102,42 +189,60 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
   }
 
   @override
-  ForecastItemModel buildForecastItem(int index) {
+  void buildForecastItem() {
     if (selectedTab == 0) {
-      return buildFromHourly(index);
+      forecastList = buildFromHourly();
     } else {
-      return buildFromDaily(index);
+      forecastList = buildFromDaily();
     }
   }
 
-  ForecastItemModel buildFromDaily (int index) {
-    DailyModel daily = weather!.daily[index];
-    TemperatureModel temperature = daily.temperature;
+  ObservableList<ForecastItemModel> buildFromDaily () {
+    ObservableList<ForecastItemModel> list = ObservableList<ForecastItemModel>.of([]);
 
-    num averageTemp = temperature.day.round()
-      + temperature.eve.round()
-      + temperature.morn.round()
-      + temperature.night.round();
+    for (int index = 0; index < weather!.daily.length; index++) {
+      DailyModel daily = weather!.daily[index];
+      TemperatureModel temperature = daily.temperature;
 
-    averageTemp /= 4;
+      num averageTemp = temperature.day.round()
+        + temperature.eve.round()
+        + temperature.morn.round()
+        + temperature.night.round();
 
-    return ForecastItemModel(
-      title: weatherService.formatDateWeek(daily.date),
-      humidity: daily.humidity.toString() + '%',
-      temp: averageTemp.round().toString() + '˚',
-      iconPath: weatherService.findIconToWeather(daily.weatherInfo.first, daily.date, daily.clouds, daily.windSpeed)
-    );
+      averageTemp /= 4;
+
+      list.add(
+        ForecastItemModel(
+          title: weatherService.formatDateWeek(daily.date),
+          humidity: daily.humidity.toString() + '%',
+          temp: averageTemp.round().toString() + '˚',
+          iconPath: weatherService.findIconToWeather(daily.weatherInfo.first, daily.date, daily.clouds, daily.windSpeed),
+          selected: daily.selected
+        )
+      );
+    }
+
+    return list;
   }
 
-  ForecastItemModel buildFromHourly (int index) {
-    HourlyModel hourly = weather!.hourly[index];
+  ObservableList<ForecastItemModel> buildFromHourly () {
+    ObservableList<ForecastItemModel> list = ObservableList<ForecastItemModel>.of([]);;
 
-    return ForecastItemModel(
-      title: weatherService.formatDateHour(hourly.date),
-      humidity: hourly.humidity.toString() + '%',
-      temp: hourly.temperature.round().toString(),
-      iconPath: weatherService.findIconToWeather(hourly.weatherInfo.first, hourly.date, hourly.clouds, hourly.windSpeed)
-    );
+    for (int index = 0; index < weather!.hourly.length; index++) {
+      HourlyModel hourly = weather!.hourly[index];
+
+      list.add(
+        ForecastItemModel(
+          title: weatherService.formatDateHour(hourly.date),
+          humidity: hourly.humidity.toString() + '%',
+          temp: hourly.temperature.round().toString(),
+          iconPath: weatherService.findIconToWeather(hourly.weatherInfo.first, hourly.date, hourly.clouds, hourly.windSpeed),
+          selected: hourly.selected
+        )
+      );
+    }
+
+    return list;
   }
 
   @override
@@ -169,12 +274,93 @@ abstract class _HomeStoreBase with Store implements IHomeStore {
       currentWeather = weather!.current;
 
       List<Placemark> location = await placemarkFromCoordinates(position.latitude, position.longitude);
+
       cityName = location.first.locality ?? '';
+      
+      if (cityName!.isEmpty) {
+        cityName = location.first.subAdministrativeArea;
+      }
+      if (cityName!.isEmpty) {
+        cityName = location.first.administrativeArea;
+      }
+      _populateForecasts();
       isLoading = false;
       return weather!;
     } on Exception catch (error) {
       log(error.toString());
       throw Exception('Error getting forecast data');
+    }
+  }
+
+  void _populateForecasts() {
+    for (int index = 0; index < weather!.daily.length; index++) {
+       dailyList.add(
+        ForecastModel(
+          temperature: weather!.daily[index].temperature.day,
+          description: weather!.daily[index].weatherInfo.first.description,
+          uvi: weather!.daily[index].uvi,
+          windSpeed: weather!.daily[index].windSpeed,
+          windDeg: weather!.daily[index].windDeg,
+          feelsLike: weather!.daily[index].feelsLike.day,
+          humidity: weather!.daily[index].humidity,
+          dewPoint: weather!.daily[index].dewPoint,
+          pressure: weather!.daily[index].pressure,
+          date: weather!.daily[index].date,
+          sunset: weather!.daily[index].sunset,
+          rain: weather!.daily[index].rain,
+          weatherInfo: weather!.daily[index].weatherInfo,
+          clouds: weather!.daily[index].clouds
+        )
+      );
+    }
+
+    for (int index = 0; index < weather!.hourly.length; index++) {
+      hourlyList.add(
+        ForecastModel(
+          temperature: weather!.hourly[index].temperature,
+          description: weather!.hourly[index].weatherInfo.first.description,
+          uvi: weather!.hourly[index].uvi,
+          windSpeed: weather!.hourly[index].windSpeed,
+          windDeg: weather!.hourly[index].windDeg,
+          feelsLike: weather!.hourly[index].feelsLike,
+          humidity: weather!.hourly[index].humidity,
+          dewPoint: weather!.hourly[index].dewPoint,
+          pressure: weather!.hourly[index].pressure,
+          date: weather!.hourly[index].date,
+          visibility: weather!.hourly[index].visibility,
+          rain: weather!.hourly[index].rain,
+          weatherInfo: weather!.hourly[index].weatherInfo,
+          clouds: weather!.hourly[index].clouds
+        )
+      );
+    }
+  }
+
+  @override
+  void findSelected(int index) {
+    clearAll();
+    if (selectedTab == 0) {
+      weather!.hourly[index].selected = true;
+    } else {
+      weather!.daily[index].selected = true;
+    }
+  }
+
+  @override
+  void clearAll() {
+    _clearDaily();
+    _clearHourly();
+  }
+
+  void _clearDaily() {
+    for (DailyModel element in weather!.daily) {
+      element.selected = false;
+    }
+  }
+
+  void _clearHourly() {
+    for (HourlyModel element in weather!.hourly) {
+      element.selected = false;
     }
   }
   

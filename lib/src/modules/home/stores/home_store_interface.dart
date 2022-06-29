@@ -3,11 +3,27 @@ import 'package:mobx/mobx.dart';
 import 'package:weather/core/models/current_weather_model.dart';
 import 'package:weather/core/models/location_weather_model.dart';
 import 'package:weather/src/modules/home/models/forecast_item_model.dart';
+import 'package:weather/src/modules/home/models/forecast_model.dart';
 
 abstract class IHomeStore with Store {
 
   set backgroundImage(String imagePath);
   String get backgroundImage;
+  
+  set selected(int? value);
+  int? get selected;
+  
+  set dailyList(List<ForecastModel> value);
+  List<ForecastModel> get dailyList;
+  
+  set forecastList(ObservableList<ForecastItemModel> value);
+  ObservableList<ForecastItemModel> get forecastList;
+
+  set hourlyList(List<ForecastModel> value);
+  List<ForecastModel> get hourlyList;
+  
+  set forecast(ForecastModel? forecast);
+  ForecastModel? get forecast;
   
   set backgroundFigure(String imagePath);
   String get backgroundFigure;
@@ -30,6 +46,9 @@ abstract class IHomeStore with Store {
   set forecastHorizontalScrollController(ScrollController value);
   ScrollController get forecastHorizontalScrollController;
 
+  set scrollController(ScrollController value);
+  ScrollController get scrollController;
+
   set isOpen(bool value);
   bool get isOpen;
 
@@ -44,9 +63,15 @@ abstract class IHomeStore with Store {
 
   void changeBackgroundimage();
 
-  ForecastItemModel buildForecastItem(int index);
+  void buildForecastItem();
 
   int forecastListLenght();
 
   Future<void> getAllForecasts();
+  
+  void buildForecast(int index);
+
+  void findSelected(int index);
+  
+  void clearAll();
 }

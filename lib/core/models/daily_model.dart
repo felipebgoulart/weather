@@ -9,10 +9,11 @@ class DailyModel extends WeatherModel {
   int sunset;
   int moonrise;
   int moonset;
-  double moonPhase;
+  num moonPhase;
   FeelsLikeModel feelsLike;
   TemperatureModel temperature;
   num? rain;
+  bool selected;
 
   DailyModel({
     required int date,
@@ -32,7 +33,8 @@ class DailyModel extends WeatherModel {
     required this.moonrise,
     required this.moonset,
     required this.moonPhase,
-    this.rain
+    this.rain,
+    this.selected = false
   }) : super(
     date: date,
     pressure: pressure,
@@ -51,7 +53,7 @@ class DailyModel extends WeatherModel {
       throw ArgumentError('Data is null');
     }
 
-    return DailyModel(
+    DailyModel a = DailyModel(
       date: json['dt'],
       temperature: TemperatureModel.fromJson(json['temp']),
       feelsLike: FeelsLikeModel.fromJson(json['feels_like']),
@@ -71,5 +73,7 @@ class DailyModel extends WeatherModel {
       moonPhase: json['moon_phase'],
       rain: json['rain'],
     );
+
+    return a;
   }
 }

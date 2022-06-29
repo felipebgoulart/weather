@@ -8,12 +8,12 @@ import 'package:weather/core/widgets/cards/item_card_widget.dart';
 
 class SunPositionCard extends StatefulWidget {
   final int date;
-  final int sunset;
+  final int? sunset;
 
   const SunPositionCard({
     Key? key,
     required this.date,
-    required this.sunset,
+    this.sunset,
   }) : super(key: key);
 
   @override
@@ -98,13 +98,15 @@ class _SunPositionCardState extends State<SunPositionCard> with SingleTickerProv
           );
         }
       ),
-      footer: Text(
-        'Sunset: ${_weatherService.formatDateHourMinute(widget.sunset)}',
+      footer: widget.sunset != null
+      ? Text(
+        'Sunset: ${_weatherService.formatDateHourMinute(widget.sunset!)}',
         style: TextStyle(
           color: AppColors.white,
           fontWeight: ui.FontWeight.w500
         ),
-      ),
+      )
+      : Container(),
     );
   }
 }

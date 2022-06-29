@@ -6,11 +6,11 @@ part of 'home_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$HomeStore on _HomeStoreBase, Store {
+mixin _$HomeStore on HomeStoreBase, Store {
   late final _$backgroundImageAtom =
-      Atom(name: '_HomeStoreBase.backgroundImage', context: context);
+      Atom(name: 'HomeStoreBase.backgroundImage', context: context);
 
   @override
   String get backgroundImage {
@@ -26,7 +26,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   }
 
   late final _$backgroundFigureAtom =
-      Atom(name: '_HomeStoreBase.backgroundFigure', context: context);
+      Atom(name: 'HomeStoreBase.backgroundFigure', context: context);
 
   @override
   String get backgroundFigure {
@@ -42,7 +42,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   }
 
   late final _$isLoadingAtom =
-      Atom(name: '_HomeStoreBase.isLoading', context: context);
+      Atom(name: 'HomeStoreBase.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -58,7 +58,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   }
 
   late final _$weatherAtom =
-      Atom(name: '_HomeStoreBase.weather', context: context);
+      Atom(name: 'HomeStoreBase.weather', context: context);
 
   @override
   LocationWeatherModel? get weather {
@@ -74,7 +74,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   }
 
   late final _$currentWeatherAtom =
-      Atom(name: '_HomeStoreBase.currentWeather', context: context);
+      Atom(name: 'HomeStoreBase.currentWeather', context: context);
 
   @override
   CurrentWeatherModel? get currentWeather {
@@ -90,7 +90,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   }
 
   late final _$cityNameAtom =
-      Atom(name: '_HomeStoreBase.cityName', context: context);
+      Atom(name: 'HomeStoreBase.cityName', context: context);
 
   @override
   String? get cityName {
@@ -106,7 +106,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   }
 
   late final _$draggableScrollableControllerAtom = Atom(
-      name: '_HomeStoreBase.draggableScrollableController', context: context);
+      name: 'HomeStoreBase.draggableScrollableController', context: context);
 
   @override
   DraggableScrollableController get draggableScrollableController {
@@ -123,7 +123,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   }
 
   late final _$forecastHorizontalScrollControllerAtom = Atom(
-      name: '_HomeStoreBase.forecastHorizontalScrollController',
+      name: 'HomeStoreBase.forecastHorizontalScrollController',
       context: context);
 
   @override
@@ -140,8 +140,24 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     });
   }
 
+  late final _$scrollControllerAtom =
+      Atom(name: 'HomeStoreBase.scrollController', context: context);
+
+  @override
+  ScrollController get scrollController {
+    _$scrollControllerAtom.reportRead();
+    return super.scrollController;
+  }
+
+  @override
+  set scrollController(ScrollController value) {
+    _$scrollControllerAtom.reportWrite(value, super.scrollController, () {
+      super.scrollController = value;
+    });
+  }
+
   late final _$isOpenAtom =
-      Atom(name: '_HomeStoreBase.isOpen', context: context);
+      Atom(name: 'HomeStoreBase.isOpen', context: context);
 
   @override
   bool get isOpen {
@@ -157,7 +173,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   }
 
   late final _$selectedTabAtom =
-      Atom(name: '_HomeStoreBase.selectedTab', context: context);
+      Atom(name: 'HomeStoreBase.selectedTab', context: context);
 
   @override
   int get selectedTab {
@@ -172,50 +188,77 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     });
   }
 
-  late final _$_HomeStoreBaseActionController =
-      ActionController(name: '_HomeStoreBase', context: context);
+  late final _$forecastAtom =
+      Atom(name: 'HomeStoreBase.forecast', context: context);
+
+  @override
+  ForecastModel? get forecast {
+    _$forecastAtom.reportRead();
+    return super.forecast;
+  }
+
+  @override
+  set forecast(ForecastModel? value) {
+    _$forecastAtom.reportWrite(value, super.forecast, () {
+      super.forecast = value;
+    });
+  }
+
+  late final _$HomeStoreBaseActionController =
+      ActionController(name: 'HomeStoreBase', context: context);
 
   @override
   void toggleSheetVisibility() {
-    final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
-        name: '_HomeStoreBase.toggleSheetVisibility');
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.toggleSheetVisibility');
     try {
       return super.toggleSheetVisibility();
     } finally {
-      _$_HomeStoreBaseActionController.endAction(_$actionInfo);
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void buildForecast(int index, {bool current = false}) {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.buildForecast');
+    try {
+      return super.buildForecast(index, current: current);
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void closeAnimate() {
-    final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
-        name: '_HomeStoreBase.closeAnimate');
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.closeAnimate');
     try {
       return super.closeAnimate();
     } finally {
-      _$_HomeStoreBaseActionController.endAction(_$actionInfo);
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void changeTab(int tab) {
-    final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
-        name: '_HomeStoreBase.changeTab');
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.changeTab');
     try {
       return super.changeTab(tab);
     } finally {
-      _$_HomeStoreBaseActionController.endAction(_$actionInfo);
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void changeBackgroundimage() {
-    final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
-        name: '_HomeStoreBase.changeBackgroundimage');
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.changeBackgroundimage');
     try {
       return super.changeBackgroundimage();
     } finally {
-      _$_HomeStoreBaseActionController.endAction(_$actionInfo);
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
@@ -230,8 +273,10 @@ currentWeather: ${currentWeather},
 cityName: ${cityName},
 draggableScrollableController: ${draggableScrollableController},
 forecastHorizontalScrollController: ${forecastHorizontalScrollController},
+scrollController: ${scrollController},
 isOpen: ${isOpen},
-selectedTab: ${selectedTab}
+selectedTab: ${selectedTab},
+forecast: ${forecast}
     ''';
   }
 }

@@ -1,7 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather/core/constants/assets_global.dart';
 import 'package:weather/core/models/location_weather_model.dart';
+import 'package:weather/core/routes/app_routes.dart';
+import 'package:weather/core/themes/app_colors.dart';
+import 'package:weather/core/themes/app_typograph.dart';
 import 'package:weather/src/modules/home/stores/home_store.dart';
 import 'package:weather/src/modules/home/widgets/bottom_navbar_widget.dart';
 import 'package:weather/src/modules/home/widgets/bottom_sheet_weather_widget.dart';
@@ -71,6 +76,13 @@ class _HomePageState extends State<HomePage> {
                                       fontSize: 96,
                                       fontWeight: FontWeight.w100
                                     ),
+                                  ),
+                                  Text(
+                                    _homeStore.currentWeather!.weatherInfo.first.description,
+                                    style: segmentTitle.copyWith(
+                                      fontSize: 24,
+                                      color: AppColors.white.withOpacity(.8)
+                                    ),
                                   )
                                 ],
                               ),
@@ -101,14 +113,17 @@ class _HomePageState extends State<HomePage> {
                     BottomNavBar(
                       size: size,
                       onMorePressed: () {
-                        debugPrint('more pressed');
                         _homeStore.toggleSheetVisibility();
                       },
                       onLocationPressed: () {
                         debugPrint('location pressed');
                       },
                       onDetailPressed: () {
-                        debugPrint('detail pressed');
+                        _homeStore.buildForecast(0, current: true);
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.forecasts,
+                        );
                       },
                     ),
                   ],
