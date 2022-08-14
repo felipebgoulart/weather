@@ -5,7 +5,7 @@ class Environment implements IEnvironment {
   Environment();
 
   @override
-  String get appId => 'db63e8ab297d07e25bad74fe085cb575';
+  String get appId => ''; // YOUR TOKEN HERE
   
   @override
   String get baseUrl => 'https://api.openweathermap.org/data/2.5';
