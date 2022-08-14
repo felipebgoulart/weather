@@ -57,6 +57,22 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  late final _$selectedAtom =
+      Atom(name: 'HomeStoreBase.selected', context: context);
+
+  @override
+  int? get selected {
+    _$selectedAtom.reportRead();
+    return super.selected;
+  }
+
+  @override
+  set selected(int? value) {
+    _$selectedAtom.reportWrite(value, super.selected, () {
+      super.selected = value;
+    });
+  }
+
   late final _$weatherAtom =
       Atom(name: 'HomeStoreBase.weather', context: context);
 
@@ -86,6 +102,54 @@ mixin _$HomeStore on HomeStoreBase, Store {
   set currentWeather(CurrentWeatherModel? value) {
     _$currentWeatherAtom.reportWrite(value, super.currentWeather, () {
       super.currentWeather = value;
+    });
+  }
+
+  late final _$dailyListAtom =
+      Atom(name: 'HomeStoreBase.dailyList', context: context);
+
+  @override
+  List<ForecastModel> get dailyList {
+    _$dailyListAtom.reportRead();
+    return super.dailyList;
+  }
+
+  @override
+  set dailyList(List<ForecastModel> value) {
+    _$dailyListAtom.reportWrite(value, super.dailyList, () {
+      super.dailyList = value;
+    });
+  }
+
+  late final _$hourlyListAtom =
+      Atom(name: 'HomeStoreBase.hourlyList', context: context);
+
+  @override
+  List<ForecastModel> get hourlyList {
+    _$hourlyListAtom.reportRead();
+    return super.hourlyList;
+  }
+
+  @override
+  set hourlyList(List<ForecastModel> value) {
+    _$hourlyListAtom.reportWrite(value, super.hourlyList, () {
+      super.hourlyList = value;
+    });
+  }
+
+  late final _$forecastListAtom =
+      Atom(name: 'HomeStoreBase.forecastList', context: context);
+
+  @override
+  ObservableList<ForecastItemModel> get forecastList {
+    _$forecastListAtom.reportRead();
+    return super.forecastList;
+  }
+
+  @override
+  set forecastList(ObservableList<ForecastItemModel> value) {
+    _$forecastListAtom.reportWrite(value, super.forecastList, () {
+      super.forecastList = value;
     });
   }
 
@@ -268,8 +332,12 @@ mixin _$HomeStore on HomeStoreBase, Store {
 backgroundImage: ${backgroundImage},
 backgroundFigure: ${backgroundFigure},
 isLoading: ${isLoading},
+selected: ${selected},
 weather: ${weather},
 currentWeather: ${currentWeather},
+dailyList: ${dailyList},
+hourlyList: ${hourlyList},
+forecastList: ${forecastList},
 cityName: ${cityName},
 draggableScrollableController: ${draggableScrollableController},
 forecastHorizontalScrollController: ${forecastHorizontalScrollController},
