@@ -1,16 +1,19 @@
 # weather
 
-A new Flutter project.
+Weather app.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a weather app, you can watch your location weather or any other location by searching.
 
-A few resources to get you started if this is your first Flutter project:
+## How to run
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Version:
+Flutter 3.0.1 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision fb57da5f94 (3 months ago) • 2022-05-19 15:50:29 -0700
+Engine • revision caaafc5604
+Tools • Dart 2.17.1 • DevTools 2.12.2
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Need to create an account in [https://openweathermap.org/] and generate a new appId
+Once your appId was generated, paste it in the env file lib>core>drivers>env.dart
+After that you just need to exec 'flutter pub get' and run the app.
