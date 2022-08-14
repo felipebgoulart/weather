@@ -10,6 +10,7 @@ import 'package:weather/core/models/daily_model.dart';
 import 'package:weather/core/models/hourly_model.dart';
 import 'package:weather/core/models/location_weather_model.dart';
 import 'package:weather/core/models/temperature_model.dart';
+import 'package:weather/core/models/weather_model.dart';
 import 'package:weather/core/services/geo/geo_service.dart';
 import 'package:weather/core/services/weather/weather_service.dart';
 import 'package:weather/src/modules/home/models/forecast_item_model.dart';
@@ -266,10 +267,10 @@ abstract class HomeStoreBase with Store implements IHomeStore {
   }
 
   @override
-  Future<LocationWeatherModel> getAllForecasts() async {
+  Future<LocationWeatherModel> getAllForecasts({ Position? position }) async {
     try {
       isLoading = true;
-      Position position = await geoService.getCurrentPosition();
+      position ??= await geoService.getCurrentPosition();
       weather = await homeRepository.getForecasts(position);
       currentWeather = weather!.current;
 
@@ -283,7 +284,7 @@ abstract class HomeStoreBase with Store implements IHomeStore {
       if (cityName!.isEmpty) {
         cityName = location.first.administrativeArea;
       }
-      _populateForecasts();
+      await _populateForecasts();
       isLoading = false;
       return weather!;
     } on Exception catch (error) {
@@ -292,7 +293,7 @@ abstract class HomeStoreBase with Store implements IHomeStore {
     }
   }
 
-  void _populateForecasts() {
+  Future<void> _populateForecasts() async {
     for (int index = 0; index < weather!.daily.length; index++) {
        dailyList.add(
         ForecastModel(

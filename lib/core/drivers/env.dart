@@ -9,4 +9,7 @@ class Environment implements IEnvironment {
   
   @override
   String get baseUrl => 'https://api.openweathermap.org/data/2.5';
+  
+  @override
+  String get baseUrlMap => 'http://api.openweathermap.org/geo/1.0';
 }

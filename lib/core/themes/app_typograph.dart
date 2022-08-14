@@ -47,3 +47,18 @@ TextStyle cardFooterText = TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.w500
 );
+
+TextStyle tileTitleStyle = TextStyle(
+  color: AppColors.lightPink,
+  fontWeight: FontWeight.w700
+);
+
+TextStyle tileSubitleStyle = TextStyle(
+  color: AppColors.lightPink.withOpacity(.5),
+  fontWeight: FontWeight.w700
+);
+
+TextStyle tileLeadingStyle = TextStyle(
+  color: AppColors.lightPink.withOpacity(.5),
+  fontWeight: FontWeight.w700
+);

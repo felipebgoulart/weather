@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_interfaces/src/route/modular_arguments.dart';
 import 'package:weather/core/drivers/env_interface.dart';
-import 'package:weather/core/models/hourly_model.dart';
 import 'package:weather/core/services/dio/dio_interface.dart';
 import 'package:weather/core/services/geo/geo_interface.dart';
 import 'package:weather/core/services/weather/weather_service.dart';
 import 'package:weather/core/services/weather/weather_service_interface.dart';
+import 'package:weather/src/modules/forecast_location/forecast_location_module.dart';
+import 'package:weather/src/modules/forecast_location/pages/forecast_location_page.dart';
 import 'package:weather/src/modules/home/pages/forecasts_page.dart';
 import 'package:weather/src/modules/home/pages/home_page.dart';
 import 'package:weather/src/modules/home/repositories/home_repository.dart';
@@ -35,6 +36,10 @@ class HomeModule extends Module {
     ChildRoute<dynamic>(
       '/forecasts',
       child: (BuildContext context, ModularArguments arguments) => const ForecastsPage(),
+    ),
+    ModuleRoute<dynamic>(
+      '/forecasts/location',
+      module: ForecastLocationModule()
     )
   ];
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 import 'package:weather/core/models/current_weather_model.dart';
 import 'package:weather/core/models/location_weather_model.dart';
@@ -67,7 +68,7 @@ abstract class IHomeStore with Store {
 
   int forecastListLenght();
 
-  Future<void> getAllForecasts();
+  Future<LocationWeatherModel> getAllForecasts({ Position? position });
   
   void buildForecast(int index);
 

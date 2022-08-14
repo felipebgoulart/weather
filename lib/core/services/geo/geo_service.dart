@@ -13,7 +13,7 @@ class GeoService implements IGeo {
           await Geolocator.requestPermission();
         } while (!await hasGeoPermission());
       }
-
+      
       Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
       return position;
     } on Exception catch (error) {

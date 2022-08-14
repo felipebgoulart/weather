@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather/core/constants/assets_global.dart';
@@ -116,7 +114,10 @@ class _HomePageState extends State<HomePage> {
                         _homeStore.toggleSheetVisibility();
                       },
                       onLocationPressed: () {
-                        debugPrint('location pressed');
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.location,
+                        );
                       },
                       onDetailPressed: () {
                         _homeStore.buildForecast(0, current: true);

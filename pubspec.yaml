@@ -22,6 +22,11 @@ dependencies:
   intl: ^0.17.0
   flutter_dotenv: ^5.0.2
   weather_icons: ^3.0.0
+  flutter_svg: ^1.1.1
+  lat_lng_to_timezone: ^0.2.0
+  timezone: ^0.8.0
+  url_launcher: ^6.1.5
+  loader_overlay: ^2.0.10
 
 dev_dependencies:
   build_runner: ^2.1.10
@@ -36,6 +41,7 @@ flutter:
     - lib/assets/images/
     - lib/assets/images/forecasts/day/
     - lib/assets/images/forecasts/night/
+    - lib/assets/svgs/
 
   fonts:
     - family: WeatherIcons
