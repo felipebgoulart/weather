@@ -10,7 +10,6 @@ import 'package:weather/core/models/daily_model.dart';
 import 'package:weather/core/models/hourly_model.dart';
 import 'package:weather/core/models/location_weather_model.dart';
 import 'package:weather/core/models/temperature_model.dart';
-import 'package:weather/core/models/weather_model.dart';
 import 'package:weather/core/services/geo/geo_service.dart';
 import 'package:weather/core/services/weather/weather_service.dart';
 import 'package:weather/src/modules/home/models/forecast_item_model.dart';
@@ -60,15 +59,15 @@ abstract class HomeStoreBase with Store implements IHomeStore {
   
   @override
   @observable
-  List<ForecastModel> dailyList = ObservableList<ForecastModel>.of([]);
+  List<ForecastModel> dailyList = ObservableList<ForecastModel>.of(<ForecastModel> []);
   
   @override
   @observable
-  List<ForecastModel> hourlyList = ObservableList<ForecastModel>.of([]);
+  List<ForecastModel> hourlyList = ObservableList<ForecastModel>.of(<ForecastModel> []);
   
   @override
   @observable
-  ObservableList<ForecastItemModel> forecastList = ObservableList<ForecastItemModel>.of([]);
+  ObservableList<ForecastItemModel> forecastList = ObservableList<ForecastItemModel>.of(<ForecastItemModel> []);
   
   @override
   @observable
@@ -94,6 +93,7 @@ abstract class HomeStoreBase with Store implements IHomeStore {
   @observable
   int selectedTab = 0;
 
+  @override
   @observable
   ForecastModel? forecast;
 
@@ -199,7 +199,7 @@ abstract class HomeStoreBase with Store implements IHomeStore {
   }
 
   ObservableList<ForecastItemModel> buildFromDaily () {
-    ObservableList<ForecastItemModel> list = ObservableList<ForecastItemModel>.of([]);
+    ObservableList<ForecastItemModel> list = ObservableList<ForecastItemModel>.of(<ForecastItemModel> []);
 
     for (int index = 0; index < weather!.daily.length; index++) {
       DailyModel daily = weather!.daily[index];
@@ -227,7 +227,7 @@ abstract class HomeStoreBase with Store implements IHomeStore {
   }
 
   ObservableList<ForecastItemModel> buildFromHourly () {
-    ObservableList<ForecastItemModel> list = ObservableList<ForecastItemModel>.of([]);;
+    ObservableList<ForecastItemModel> list = ObservableList<ForecastItemModel>.of(<ForecastItemModel> []);
 
     for (int index = 0; index < weather!.hourly.length; index++) {
       HourlyModel hourly = weather!.hourly[index];

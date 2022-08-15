@@ -4,6 +4,7 @@ import 'package:weather/core/drivers/env_interface.dart';
 import 'package:weather/core/services/dio/dio_interface.dart';
 import 'package:weather/core/services/geo/geo_service.dart';
 import 'package:weather/core/services/weather/weather_service.dart';
+// ignore: implementation_imports
 import 'package:modular_interfaces/src/route/modular_arguments.dart';
 import 'package:weather/src/modules/forecast_location/pages/forecast_location_page.dart';
 import 'package:weather/src/modules/forecast_location/repositories/forecast_location_repository.dart';

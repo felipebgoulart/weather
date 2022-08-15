@@ -25,7 +25,7 @@ abstract class ForecastLocationStoreBase with Store implements IForecastLocation
 
   @observable
   @override
-  ObservableList<CityModel> citiesList = ObservableList<CityModel>.of([]);
+  ObservableList<CityModel> citiesList = ObservableList<CityModel>.of(<CityModel> []);
   
   @observable
   @override

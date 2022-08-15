@@ -23,6 +23,7 @@ class ForecastLocationRepository {
 
       Response<dynamic> result = await httpDio.get(
         '$_baseUrl/direct',
+        // ignore: always_specify_types
         queryParameters: {
           'q': query,
           'limit': 5,

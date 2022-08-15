@@ -22,13 +22,13 @@ class HomeRepository {
     try {
       Response<dynamic> result = await httpDio.get(
         '$_baseUrl/onecall',
+        // ignore: always_specify_types
         queryParameters: {
           'lat': position.latitude,
           'lon': position.longitude,
           'dt': DateTime.now().millisecondsSinceEpoch,
           'appid': env.appId,
           'units': 'metric',
-          // 'lang': 'pt_br'
         }
       );
 

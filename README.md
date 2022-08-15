@@ -6,6 +6,9 @@ Weather app.
 
 This project is a weather app, you can watch your location weather or any other location by searching.
 
+- The app uses OpenWeather free API [https://openweathermap.org/]
+- Based in UI/UX found in figma community [https://www.figma.com/file/LdFBQqYLAj8gX05PzmXhPR/Weather-App-UI-Design-(Community)?node-id=2%3A2214]
+
 ## How to run
 
 Version:

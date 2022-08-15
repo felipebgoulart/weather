@@ -1,7 +1,6 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:weather/core/routes/app_routes.dart';
 import 'package:weather/core/themes/app_colors.dart';
 import 'package:weather/src/modules/home/models/forecast_item_model.dart';
 import 'package:weather/src/modules/home/stores/home_store.dart';

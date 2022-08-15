@@ -29,7 +29,7 @@ class WindSpeedCard extends StatelessWidget {
               width: constraints.maxHeight,
               child: Stack(
                 alignment: Alignment.center,
-                children: [
+                children: <Widget> [
                   CustomPaint(
                     size: Size(constraints.maxWidth, constraints.maxHeight),
                     painter: WindCompassPainter(windDeg.toDouble()),
@@ -67,7 +67,7 @@ class WindSpeedCard extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: <Widget> [
                           Text(
                             windSpeed.toString(),
                             style: directionsCompass,

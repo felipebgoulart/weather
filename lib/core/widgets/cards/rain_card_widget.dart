@@ -26,7 +26,7 @@ class RainCard extends StatelessWidget {
             style: cardBodyText,
           ),
           Text(
-            true ? 'in last hour' : 'Preceptation',
+            'in last hour',
             style: cardBodyText
           ),
         ],

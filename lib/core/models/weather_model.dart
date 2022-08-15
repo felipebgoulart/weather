@@ -1,4 +1,3 @@
-import 'package:weather/core/models/rain_model.dart';
 import 'package:weather/core/models/weather_info_model.dart';
 
 abstract class WeatherModel {

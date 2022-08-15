@@ -1,11 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:timezone/standalone.dart';
-import 'package:timezone/tzdata.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:weather/core/routes/app_routes.dart';
 import 'package:weather/core/themes/app_colors.dart';
@@ -14,6 +11,7 @@ import 'package:weather/src/modules/forecast_location/models/city_model.dart';
 import 'package:weather/src/modules/forecast_location/stores/forecast_location_interface.dart';
 import 'package:weather/src/modules/forecast_location/stores/forecast_location_store.dart';
 import 'package:weather/src/modules/home/stores/home_store.dart';
+// ignore: implementation_imports
 import 'package:timezone/src/location.dart' as location;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:lat_lng_to_timezone/lat_lng_to_timezone.dart' as tzmap;
@@ -112,7 +110,7 @@ class _ForecastLocationPageState extends State<ForecastLocationPage> {
                         CityModel city = _forecastLocationStore.citiesList[index];
                   
                         return Column(
-                          children: [
+                          children: <Widget> [
                             Theme(
                               data: ThemeData(
                                 splashColor: AppColors.purpleDarker,
@@ -146,9 +144,9 @@ class _ForecastLocationPageState extends State<ForecastLocationPage> {
                                   )
                                 ),
                                 onTap: () {
-                                  _forecastLocationStore.citiesList.forEach((element) {
+                                  for (CityModel element in _forecastLocationStore.citiesList) {
                                     element.selected = false;
-                                  });
+                                  }
                                   city.selected = !city.selected;
                                   _forecastLocationStore.citiesList.removeAt(index);
                                   _forecastLocationStore.citiesList.insert(index, city);
@@ -214,6 +212,7 @@ class _ForecastLocationPageState extends State<ForecastLocationPage> {
                                             if (await canLaunchUrl(Uri.parse(googleUrl))) {
                                               await launchUrl(Uri.parse(googleUrl));
                                             } else {
+                                              // ignore: only_throw_errors
                                               throw 'Could not open the map.';
                                             }
                                           },

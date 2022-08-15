@@ -39,7 +39,7 @@ class _ForecastsPageState extends State<ForecastsPage> {
               Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
-                  children: [
+                  children: <Widget> [
                     Text(
                       _homeStore.cityName ?? '',
                       style: title,

@@ -15,7 +15,7 @@ class _AppWidgetState extends State<AppWidget> {
   Widget build(BuildContext context){
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'My Smart App',
+      title: 'Smart Weather',
       theme: AppTheme.theme,
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
