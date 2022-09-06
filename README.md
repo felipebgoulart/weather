@@ -2,6 +2,8 @@
 
 Weather is a simple weather application for getting your current forecast.
 
+![Weather Logo](social.png 'Weather Logo')
+
 ## Overview
 
 This project was generated using [Flutter](https://github.com/flutter) version 3.0.1 <br>
