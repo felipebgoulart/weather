@@ -6,7 +6,7 @@ class CurrentWeatherModel extends WeatherModel {
 
   int sunrise;
   int sunset;
-  double feelsLike;
+  num feelsLike;
   int visibility;
   num temperature;
   RainModel? rain;
