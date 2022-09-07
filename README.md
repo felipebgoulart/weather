@@ -2,6 +2,8 @@
 
 Weather is a simple weather application for getting your current forecast.
 
+[Design - Figma](https://www.figma.com/file/5rKzhMtchycPmXpFXAvo7L/Weather)
+
 ![Weather Logo](social.png 'Weather Logo')
 
 ## Overview
