@@ -11,7 +11,7 @@ Weather is a simple weather application for getting your current forecast.
 This project was generated using [Flutter](https://github.com/flutter) version 3.0.1 <br>
 [Cocoapods](https://github.com/CocoaPods/CocoaPods)
 
-## Prerequisite
+## Requirements
 
 Version:
 [Flutter](https://github.com/flutter/flutter) Version 3.0.1 • channel stable <br>
@@ -22,3 +22,32 @@ Tools • Dart Version 2.17.1 • [DevTools](https://github.com/flutter/devtools
 The app uses OpenWeather API to work, so you need to create an account in [https://openweathermap.org/] and generate a new appId
 Once your appId was generated, paste it in the env file lib>core>drivers>env.dart
 After that you just need to execute 'flutter pub get' and run the app.
+
+## Installation
+
+Run the following command in your terminal:
+```
+git clone https://github.com/felipebgoulart/weather.git
+```
+
+## Execution
+
+Run the following command in your terminal to install dependencies:
+```
+flutter pub get
+```
+
+And then run
+```
+flutter run
+```
+
+## Features
+
+> 1. Search by another location weather
+> 2. See your current location weather
+> 3. You can see forecast data like, wind speed, wind direction, pressure, sun position and more.
+
+## Device Permissions
+
+> 1. Location
